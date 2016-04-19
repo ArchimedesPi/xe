@@ -3,10 +3,19 @@
 ### A simple 3d (game?) engine written for learning purposes
 
 ## building/hacking
+xe *definitely* builds and runs on:
+ * Arch Linux
+xe will *almost certainly* build and run on:
+ * Pretty much any Linux
+xe *might* work on:
+ * OS X
+ * FreeBSD
+
 you'll need:
  * cmake
  * ninja
  * glfw 3.1.2
+ * libgl
 
 this is a standard cmake-style project, so do the cmakey thing:
 ```
