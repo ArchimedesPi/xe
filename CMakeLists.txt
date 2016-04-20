@@ -20,7 +20,7 @@ include_directories(${GLEW_INCLUDE_DIRS})
 add_subdirectory(imgui)
 include_directories(imgui)
 
-add_executable(xe main.cpp gui.cpp)
+add_executable(xe main.cpp gui.cpp shaders.cpp)
 
 target_link_libraries(xe ${OPENGL_LIBRARIES})
 target_link_libraries(xe ${GLFW_LIBRARIES})
