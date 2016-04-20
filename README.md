@@ -1,5 +1,4 @@
-# xe
-## X Engine
+# xe - x engine
 ### A simple 3d (game?) engine written for learning purposes
 
 ## building/hacking
