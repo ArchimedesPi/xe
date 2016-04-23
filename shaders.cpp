@@ -19,7 +19,7 @@ GLuint load_shader_from_string(const char *shader_string, GLenum shader_type) {
 
     if (!success) {
         glGetShaderInfoLog(shader, 512, NULL, infoLog);
-        std::cerr << "shader compilation (" << shader << ") failed: " << infoLog << '\n';
+        std::cerr << "shader (" << shader << ") compilation failed: " << infoLog << '\n';
     }
 
     return shader;
