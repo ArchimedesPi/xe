@@ -10,9 +10,6 @@ find_package (OpenGL REQUIRED)
 find_package (GLEW REQUIRED)
 pkg_search_module (GLFW REQUIRED glfw3)
 
-include_directories ("${PROJECT_SOURCE_DIR}/src")
-link_directories ("${PROJECT_SOURCE_DIR}/src")
-
 include_directories(${OPENGL_INCLUDE_DIRS})
 include_directories(${GLFW_INCLUDE_DIRS})
 include_directories(${GLEW_INCLUDE_DIRS})
