@@ -1,10 +1,29 @@
 #ifndef __SHADER_H__
 #define __SHADER_H__
 
-GLuint load_shader_from_string(const char *shader_string, GLenum shader_type);
-GLuint load_shader_from_file(const char *path, GLenum shader_type);
+class Shader {
+public:
+    ~Shader();
 
-// just a wrapper with error reporting
-void link_shader_program(GLuint shader_program);
+    static Shader fromFile(std::string path, GLenum shader_type_);
+    static Shader fromString(std::string code, GLenum shader_type_);
+
+    GLuint shader_id;
+    GLenum shader_type;
+private:
+    Shader(std::string code, GLenum shader_type_);
+};
+
+class ShaderProgram {
+public:
+    ShaderProgram();
+
+    ShaderProgram &addShader(Shader shader);
+    ShaderProgram &link();
+
+    void use();
+
+    GLuint shader_program_id;
+};
 
 #endif

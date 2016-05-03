@@ -5,43 +5,70 @@
 #include <GL/glew.h>
 
 #include "shaders.h"
+#include "exceptions.h"
+
+Shader::Shader(std::string code_, GLenum shader_type_) {
+    shader_type = shader_type_;
+
+    const GLchar *code = code_.c_str();
+
+    shader_id = glCreateShader(shader_type);
+    glShaderSource(shader_id, 1, &code, NULL);
+    glCompileShader(shader_id);
+
+    GLint success; GLchar error_log[512];
+    glGetShaderiv(shader_id, GL_COMPILE_STATUS, &success);
+    if (!success) {
+        glGetShaderInfoLog(shader_id, 512, NULL, error_log);
+        throw ShaderCompileException(std::string(error_log));
+    }
+}
+
+Shader::~Shader() {
+    glDeleteShader(shader_id);
+}
+
+Shader Shader::fromFile(std::string path, GLenum shader_type_) {
+    std::ifstream shader_file;
+    shader_file.exceptions(std::ifstream::badbit);
+    shader_file.open(path);
+    std::string code;
+    shader_file.seekg(0, std::ios::end);
+    code.reserve(shader_file.tellg());
+    shader_file.seekg(0, std::ios::beg);
+    code.assign((std::istreambuf_iterator<char>(shader_file)),
+            std::istreambuf_iterator<char>());
+
+    return Shader(code, shader_type_);
+}
+
+Shader Shader::fromString(std::string code, GLenum shader_type_) {
+    return Shader(code, shader_type_);
+}
 
 
-GLuint load_shader_from_string(const char *shader_string, GLenum shader_type) {
-    GLuint shader;
-    shader = glCreateShader(shader_type);
-    glShaderSource(shader, 1, &shader_string, NULL);
-    glCompileShader(shader);
+ShaderProgram::ShaderProgram() {
+    shader_program_id = glCreateProgram();
+}
+
+ShaderProgram &ShaderProgram::addShader(Shader shader) {
+    glAttachShader(shader_program_id, shader.shader_id);
+    return *this;
+}
+
+ShaderProgram &ShaderProgram::link() {
+    glLinkProgram(shader_program_id);
+
+    GLint success; GLchar error_log[512];
+    glGetProgramiv(shader_program_id, GL_LINK_STATUS, &success);
+    if (!success) {
+        glGetProgramInfoLog(shader_program_id, 512, NULL, error_log);
+        throw ShaderLinkException(std::string(error_log));
+    }
     
-    GLint success;
-    GLchar infoLog[512];
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-
-    if (!success) {
-        glGetShaderInfoLog(shader, 512, NULL, infoLog);
-        std::cerr << "shader (" << shader << ") compilation failed: " << infoLog << '\n';
-    }
-
-    return shader;
+    return *this;
 }
 
-GLuint load_shader_from_file(const char *path, GLenum shader_type) {
-    std::ifstream shader_in(path);
-    std::string shader_string((std::istreambuf_iterator<char>(shader_in)),
-                std::istreambuf_iterator<char>());
-    const char* shader_c_string = shader_string.c_str();
-
-    return load_shader_from_string(shader_c_string, shader_type);
-}
-
-void link_shader_program(GLuint shader_program) {
-    glLinkProgram(shader_program);
-
-    GLint success;
-    GLchar info[512];
-    glGetProgramiv(shader_program, GL_LINK_STATUS, &success);
-    if (!success) {
-        glGetProgramInfoLog(shader_program, 512, NULL, info);
-        std::cerr << "shader program (" << shader_program << ") compilation failed: " << info << '\n';
-    }
+void ShaderProgram::use() {
+    glUseProgram(shader_program_id);
 }
