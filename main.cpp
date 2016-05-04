@@ -49,15 +49,11 @@ int main(int argc, char* argv[]) {
 
     ImGui_ImplGlfwGL3_Init(window, true);
 
-    GLuint vertexShader = load_shader_from_file("shaders/vertex/passthrough.vert", GL_VERTEX_SHADER);
-    GLuint fragmentShader = load_shader_from_file("shaders/fragment/helloworld.frag", GL_FRAGMENT_SHADER);
-
-    GLuint shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    link_shader_program(shaderProgram);
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
+    Shader vertexShader = Shader::fromFile("shaders/vertex/passthrough.vert", GL_VERTEX_SHADER);
+    Shader fragmentShader = Shader::fromFile("shaders/fragment/helloworld.frag", GL_FRAGMENT_SHADER);
+    ShaderProgram shaderProgram = ShaderProgram::ShaderProgram()
+        .addShader(vertexShader).addShader(fragmentShader)
+        .link();
 
     GLfloat vertices[] = {
          0.5f,  0.5f, 0.0f,  // Top Right
@@ -104,7 +100,7 @@ int main(int argc, char* argv[]) {
         glClearColor(0.13f, 0.13f, 0.13f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glUseProgram(shaderProgram);
+        shaderProgram.use();
         glBindVertexArray(VAO);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
