@@ -9,6 +9,7 @@ Makefile
 cmake_install.cmake
 install_manifest.txt
 build/
+build_xcode/
 
 
 ### C++ ###
