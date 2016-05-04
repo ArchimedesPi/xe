@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 
 #include <GL/glew.h>
@@ -32,14 +33,9 @@ Shader Shader::fromFile(std::string path, GLenum shader_type_) {
     std::ifstream shader_file;
     shader_file.exceptions(std::ifstream::badbit);
     shader_file.open(path);
-    std::string code;
-    shader_file.seekg(0, std::ios::end);
-    code.reserve(shader_file.tellg());
-    shader_file.seekg(0, std::ios::beg);
-    code.assign((std::istreambuf_iterator<char>(shader_file)),
-            std::istreambuf_iterator<char>());
+    std::stringstream file_stream; file_stream << shader_file.rdbuf();
 
-    return Shader(code, shader_type_);
+    return Shader(file_stream.str(), shader_type_);
 }
 
 Shader Shader::fromString(std::string code, GLenum shader_type_) {
