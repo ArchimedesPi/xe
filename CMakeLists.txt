@@ -26,3 +26,7 @@ target_link_libraries(xe ${GLFW_LIBRARIES})
 target_link_libraries(xe ${GLEW_LIBRARIES})
 target_link_libraries(xe imgui)
 
+add_custom_command(TARGET xe PRE_BUILD
+                   COMMAND ${CMAKE_COMMAND} -E copy_directory
+                       ${CMAKE_SOURCE_DIR}/shaders $<TARGET_FILE_DIR:xe>/shaders)
+
