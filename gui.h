@@ -10,6 +10,7 @@ struct GUIState {
 
     bool render_mnormals;
     bool render_datastructures;
+    bool render_wireframe;
 };
 extern struct GUIState gui_state;
 

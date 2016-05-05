@@ -7,6 +7,7 @@ struct GUIState gui_state = {
 
     .render_mnormals = false,
     .render_datastructures = false,
+    .render_wireframe = false,
 };
 
 void render_gui() {
@@ -28,6 +29,7 @@ static void render_mmb_view() {
     if (ImGui::BeginMenu("Visuals")) {
         ImGui::MenuItem("Render mesh normals", NULL, &gui_state.render_mnormals);
         ImGui::MenuItem("Render datastructure overlays", NULL, &gui_state.render_datastructures);
+        ImGui::MenuItem("Render as wireframes", NULL, &gui_state.render_wireframe);
         ImGui::EndMenu();
     }
     ImGui::MenuItem("IMGUI Metrics", NULL, &gui_state.imgui_metrics_window_open);
