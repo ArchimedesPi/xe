@@ -68,3 +68,7 @@ ShaderProgram &ShaderProgram::link() {
 void ShaderProgram::use() {
     glUseProgram(shader_program_id);
 }
+
+GLuint ShaderProgram::uniform(std::string uniform) {
+    return glGetUniformLocation(shader_program_id, uniform.c_str());
+}
