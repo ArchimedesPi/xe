@@ -18,7 +18,9 @@ include_directories(${GLEW_INCLUDE_DIRS})
 include_directories(${SOIL_INCLUDE_DIRS})
 
 add_subdirectory(imgui)
+add_subdirectory(glm)
 include_directories(imgui)
+include_directories(glm)
 
 include_directories(${PROJECT_SOURCE_DIR})
 
