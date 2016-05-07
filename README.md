@@ -27,15 +27,17 @@ $ cmake -GNinja ..
 $ ninja
 ```
 
-make should fart out an executable, `xe`. run this to start the engine.
+ninja should produce an executable, `xe`. run this to start the engine.
 
 ## thanks and acknowledgements
 thanks to:
- * the GLFW team for an awesome library
+ * the GLFW, GLM, and SOIL authors for awesome libraries
  * John Carmack for writing the Doom and Quake engines (great learning resource and inspiration)
+ * Robert Nystrom for writing Game Programming Patterns, which has been an incredible help with architecture and design patterns
 
 ## license
 xe - a simple 3d game engine written for learning purposes
+
 Copyright (C) 2016  Liam Marshall
 
 This program is free software: you can redistribute it and/or modify
