@@ -19,6 +19,8 @@ you'll need:
  * libgl
  * libSOIL
 
+this project uses submodules for things like `stb_*.h` and simpleini, so **you must clone xe with `--recursive`**.
+
 this is a standard cmake-style project, so do the cmakey thing:
 ```
 $ mkdir build

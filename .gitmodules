@@ -1,0 +1,3 @@
+[submodule "deps/simpleini"]
+	path = deps/simpleini
+	url = https://github.com/brofield/simpleini
