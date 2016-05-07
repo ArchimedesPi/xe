@@ -1,9 +1,16 @@
 #ifndef __TEST_CUBE_H__
 #define __TEST_CUBE_H__
 
-class Cube : public GameObject {
+#include "gameobject.h"
+#include "renderable.h"
+
+class Cube : public GameObject {};
+
+class CubeRenderer : public Renderable {
 public:
-    Cube() {}
+    void render();
+
+    virtual void render(GameObject *obj);
 };
 
 #endif
