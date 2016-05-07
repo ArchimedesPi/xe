@@ -1,18 +1,22 @@
 #ifndef __SCENEGRAPH_H__
 #define __SCENEGRAPH_H__
 
-#include <list>
+#include <vector>
 #include <glm/glm.hpp>
 
-class Node {
+class SceneNode {
 public:
-    Node();
-    virtual ~Node();
+    SceneNode();
+    virtual ~SceneNode();
 
-    void addChild(Node *child);
+    void addChild(SceneNode *child);
 
-    void computeLocalTransforms();
-    void computeAllTransforms();
+    void computeTransforms();
+    void computeBackTransforms();
+    void computeDependantTransforms();
+
+    void dumpTransforms();
+    void dumpParameters();
 
     glm::mat4 local_matrix;
     glm::mat4 world_matrix;
@@ -20,8 +24,8 @@ public:
     float x=0, y=0, z=0;
     float roll=0, pitch=0, yaw=0;
 
-    Node *parent;
-    std::list<Node*> children;
+    SceneNode *parent = NULL;
+    std::vector<SceneNode*> children;
 };
 
 #endif
