@@ -16,6 +16,7 @@
   * mipmapping (✘)
   * transparency and ordering (✘)
   * (*far in the future*) deferred shading (✘)
+* camera (✘)
 * model loading (✘)
 * input layer (✘)
 
