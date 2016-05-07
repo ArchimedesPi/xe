@@ -73,8 +73,6 @@ int main(int argc, char* argv[]) {
         cube->dumpTransforms();
     }
 
-    return 1;
-
     // -- game loop
     while(!glfwWindowShouldClose(window)) {
         int width, height; float ratio;
