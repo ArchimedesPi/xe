@@ -17,6 +17,7 @@ you'll need:
  * ninja
  * glfw 3.1.2
  * libgl
+ * libSOIL
 
 this is a standard cmake-style project, so do the cmakey thing:
 ```
