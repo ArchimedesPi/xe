@@ -11,6 +11,7 @@
 #include <SOIL.h>
 
 #include "gui.h"
+#include "scenegraph.h"
 #include "shaders.h"
 
 static void glfw_error_callback(int error, const char* description) {

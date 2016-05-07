@@ -7,7 +7,7 @@
 
 Node::Node() {}
 
-virtual Node::Node~() {
+virtual Node::~Node() {
     std::for_each(children.begin(),
             children.end(),
             std::mem_fun(&Node::~Node));

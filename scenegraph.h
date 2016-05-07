@@ -1,10 +1,13 @@
 #ifndef __SCENEGRAPH_H__
 #define __SCENEGRAPH_H__
 
+#include <list>
+#include <glm/glm.hpp>
+
 class Node {
 public:
     Node();
-    virtual Node~();
+    virtual ~Node();
 
     void addChild(Node *child);
 
