@@ -1,7 +1,7 @@
 #ifndef __RENDERER_H__
 #define __RENDERER_H__
 
-#include <list>
+#include <vector>
 #include "renderable.h"
 
 class Renderer {
@@ -9,7 +9,7 @@ public:
     void renderAll();
     void render(Renderable *renderable);
 
-    std::list<Renderable*> renderables;
+    std::vector<Renderable*> renderables;
 };
 
 #endif
