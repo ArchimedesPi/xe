@@ -12,6 +12,9 @@
 
 #include "gui.h"
 #include "scenegraph.h"
+#include "gameobject.h"
+#include "scene.h"
+#include "cube.h"
 #include "shaders.h"
 
 static void glfw_error_callback(int error, const char* description) {
@@ -53,19 +56,40 @@ int main(int argc, char* argv[]) {
 
     ImGui_ImplGlfwGL3_Init(window, true);
 
+    Scene scene = Scene::Scene();
+
+    scene.rootNode.dumpParameters();
+
+    // populate the scene
+    for (int i=0; i<2; i++) {
+        Cube *cube = new Cube();
+        cube->x = 0;
+        cube->y = 0;
+        cube->z = 10;
+        scene.rootNode.addChild(cube);
+
+        cube->dumpParameters();
+        cube->computeBackTransforms();
+        cube->dumpTransforms();
+    }
+
+    return 1;
+
+    // -- game loop
     while(!glfwWindowShouldClose(window)) {
-        // main game loop
         int width, height; float ratio;
         glfwGetFramebufferSize(window, &width, &height);
         ratio = (float)width / (float)height;
 
+        // fix for some weird issues on mac os x
         glViewport(0, 0, width, height);
 
+        // clear the screen
         glClearColor(0.13f, 0.13f, 0.13f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
         if (gui_state.render_wireframe) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        // render our stuff here
+        //renderer.renderAll();
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
         ImGui_ImplGlfwGL3_NewFrame();
