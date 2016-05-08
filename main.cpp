@@ -14,8 +14,10 @@
 #include "scenegraph.h"
 #include "gameobject.h"
 #include "scene.h"
+#include "renderer.h"
 #include "cube.h"
 #include "shaders.h"
+
 
 static void glfw_error_callback(int error, const char* description) {
     std::cout << "GLFW error (" << error << "): " << description << '\n';
@@ -56,22 +58,25 @@ int main(int argc, char* argv[]) {
 
     ImGui_ImplGlfwGL3_Init(window, true);
 
-    Scene scene = Scene::Scene();
+    Renderer renderer = Renderer::Renderer();
+    CubeRenderer *cubeRenderer = new CubeRenderer();
+    renderer.addRenderable(cubeRenderer);
+    renderer.setupRenderables();
 
+    Scene scene = Scene::Scene();
     scene.rootNode.dumpParameters();
 
     // populate the scene
-    for (int i=0; i<2; i++) {
-        Cube *cube = new Cube();
-        cube->x = 0;
-        cube->y = 0;
-        cube->z = 10;
-        scene.rootNode.addChild(cube);
+    Cube *cube = new Cube();
+    cube->x = 0;
+    cube->y = 0;
+    cube->z = 0;
+    cube->roll = 0.1;
+    scene.rootNode.addChild(cube);
 
-        cube->dumpParameters();
-        cube->computeBackTransforms();
-        cube->dumpTransforms();
-    }
+    cube->computeBackTransforms();
+    cube->dumpParameters();
+    cube->dumpTransforms();
 
     // -- game loop
     while(!glfwWindowShouldClose(window)) {
@@ -84,10 +89,11 @@ int main(int argc, char* argv[]) {
 
         // clear the screen
         glClearColor(0.13f, 0.13f, 0.13f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         if (gui_state.render_wireframe) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         //renderer.renderAll();
+        renderer.render(cubeRenderer, cube);
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
         ImGui_ImplGlfwGL3_NewFrame();
