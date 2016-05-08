@@ -1,6 +1,9 @@
 #ifndef __SHADER_H__
 #define __SHADER_H__
 
+#include <GL/glew.h>
+#include <string>
+
 class Shader {
 public:
     ~Shader();
