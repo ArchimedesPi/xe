@@ -1,4 +1,6 @@
 #include <iostream>
+#include <functional>
+#include <algorithm>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
