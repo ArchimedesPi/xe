@@ -23,7 +23,8 @@ include_directories(deps/glm)
 
 include_directories(${PROJECT_SOURCE_DIR})
 
-add_executable(xe main.cpp gui.cpp shaders.cpp scenegraph.cpp scene.cpp)
+add_executable(xe main.cpp gui.cpp shaders.cpp scenegraph.cpp scene.cpp
+    renderer.cpp cube.cpp)
 
 target_link_libraries(xe ${OPENGL_LIBRARIES})
 target_link_libraries(xe ${GLFW_LIBRARIES})
