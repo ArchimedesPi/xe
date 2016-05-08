@@ -48,14 +48,14 @@ void SceneNode::computeDependantTransforms() {
 }
 
 void SceneNode::dumpTransforms() {
-    std::cout << "scene node (" << this << ") transforms:\n" \
+    std::cout << "scene node (" << this << ", parent:" << this->parent << ") transforms:\n" \
         << "\tlocal: " << glm::to_string(local_matrix) \
         << "\n\tworld: " << glm::to_string(world_matrix) \
         << std::endl;
 }
 
 void SceneNode::dumpParameters() {
-    std::cout << "scene node (" << this << ") properties:\n" \
+    std::cout << "scene node (" << this << ", parent:" << this->parent << ") properties:\n" \
         << "\tx:" << this->x \
         << " y:" << this->y \
         << " z:" << this->z \
