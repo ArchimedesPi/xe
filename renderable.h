@@ -5,7 +5,7 @@
 
 class Renderable {
 public:
-    virtual ~Renderable();
+    virtual ~Renderable() {};
 
     virtual void shaderSetup();
     virtual void render(GameObject *obj);
