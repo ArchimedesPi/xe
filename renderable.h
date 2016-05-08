@@ -7,8 +7,8 @@ class Renderable {
 public:
     virtual ~Renderable() {};
 
-    virtual void shaderSetup();
-    virtual void render(GameObject *obj);
+    virtual void setup() = 0;
+    virtual void renderInstance(GameObject *obj) = 0;
 };
 
 #endif
