@@ -19,6 +19,7 @@ public:
     void dumpParameters();
 
     glm::mat4 local_matrix;
+    glm::mat4 custom_matrix = glm::mat4();
     glm::mat4 world_matrix;
 
     float x=0, y=0, z=0;

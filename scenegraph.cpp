@@ -25,8 +25,10 @@ void SceneNode::addChild(SceneNode *child) {
 }
 
 void SceneNode::computeTransforms() {
-    local_matrix = glm::translate(local_matrix, glm::vec3(x,y,z));
-    local_matrix *= glm::yawPitchRoll(yaw, pitch, roll);
+    local_matrix = glm::translate(glm::mat4(), glm::vec3(x,y,z))
+        * glm::yawPitchRoll(yaw, pitch, roll)
+        * custom_matrix;
+
     if (parent != NULL) {
         world_matrix = parent->world_matrix * local_matrix;
     } else {
