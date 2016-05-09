@@ -35,7 +35,7 @@ void CubeRenderer::setup() {
     glBindVertexArray(0);
 }
 
-void CubeRenderer::renderInstance(GameObject *obj) {
+void CubeRenderer::renderInstance(GameObject *obj, Game *game_) {
     shader.use();
 
     glm::mat4 model, view, projection;

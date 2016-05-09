@@ -4,9 +4,12 @@
 #include <vector>
 #include "renderable.h"
 #include "gameobject.h"
+#include "game.h"
 
 class Renderer {
 public:
+    Renderer(Game *game) : game_(game) {}
+
     void addRenderable(Renderable *renderable);
     void setupRenderables();
 
@@ -15,6 +18,9 @@ public:
     void render(Renderable *renderable, GameObject *instance);
 
     std::vector<Renderable*> renderables;
+
+private:
+    Game *game_;
 };
 
 #endif
