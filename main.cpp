@@ -10,6 +10,7 @@
 
 #include <SOIL.h>
 
+#include "game.h"
 #include "gui.h"
 #include "scenegraph.h"
 #include "gameobject.h"
@@ -58,7 +59,9 @@ int main(int argc, char* argv[]) {
 
     ImGui_ImplGlfwGL3_Init(window, true);
 
-    Renderer renderer = Renderer::Renderer();
+    Game game = Game::Game();
+
+    Renderer renderer = Renderer::Renderer(&game);
     CubeRenderer *cubeRenderer = new CubeRenderer();
     renderer.addRenderable(cubeRenderer);
     renderer.setupRenderables();
@@ -80,12 +83,12 @@ int main(int argc, char* argv[]) {
 
     // -- game loop
     while(!glfwWindowShouldClose(window)) {
-        int width, height; float ratio;
-        glfwGetFramebufferSize(window, &width, &height);
-        ratio = (float)width / (float)height;
+
+        glfwGetFramebufferSize(window, &game.width, &game.height);
+        game.ratio = (float)game.width / (float)game.height;
 
         // fix for some weird issues on mac os x
-        glViewport(0, 0, width, height);
+        glViewport(0, 0, game.width, game.height);
 
         // clear the screen
         glClearColor(0.13f, 0.13f, 0.13f, 1.0f);
