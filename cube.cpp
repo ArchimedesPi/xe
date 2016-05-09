@@ -43,9 +43,8 @@ void CubeRenderer::renderInstance(GameObject *obj, Game *game_) {
     model = obj->world_matrix;
 
     // "camera" shit
-    view = glm::translate(view, glm::vec3(0.0f, 1.1f, -3.0f));
-    projection = glm::perspective(45.0f, 1.5f, 0.1f, 100.0f);
-
+    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+    projection = glm::perspective(45.0f, game_->ratio, 0.1f, 100.0f);
 
     glUniformMatrix4fv(shader.uniform("model"), 1, GL_FALSE, glm::value_ptr(model));
     glUniformMatrix4fv(shader.uniform("view"), 1, GL_FALSE, glm::value_ptr(view));
