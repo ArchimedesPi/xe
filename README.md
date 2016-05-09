@@ -4,13 +4,11 @@
 ## building/hacking
 xe *definitely* builds and runs on:
  * Arch Linux
-
-xe will *almost certainly* build and run on:
- * Pretty much any Linux
+ * Debian
+ * Mac OS X
 
 xe *might* work on:
- * OS X
- * FreeBSD
+ * FreeBSD/PcBSD
 
 you'll need:
  * cmake
