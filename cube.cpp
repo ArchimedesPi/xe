@@ -40,7 +40,6 @@ void CubeRenderer::renderInstance(GameObject *obj, Game *game_) {
 
     glm::mat4 model, view, projection;
    
-    obj->computeBackTransforms();
     model = obj->world_matrix;
 
     // "camera" shit
