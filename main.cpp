@@ -83,6 +83,8 @@ int main(int argc, char* argv[]) {
 
     // -- game loop
     while(!glfwWindowShouldClose(window)) {
+        cube->yaw = glfwGetTime() * 0.5f;
+        cube->computeBackTransforms();
 
         glfwGetFramebufferSize(window, &game.width, &game.height);
         game.ratio = (float)game.width / (float)game.height;
