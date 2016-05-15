@@ -5,10 +5,11 @@
 #include "renderable.h"
 #include "gameobject.h"
 #include "game.h"
+#include "camera.h"
 
 class Renderer {
 public:
-    Renderer(Game *game) : game_(game) {}
+    Renderer(Game *game, Camera *camera) : game_(game), camera_(camera) {}
 
     void addRenderable(Renderable *renderable);
     void setupRenderables();
@@ -18,9 +19,11 @@ public:
     void render(Renderable *renderable, GameObject *instance);
 
     std::vector<Renderable*> renderables;
+    Camera *camera;
 
 private:
     Game *game_;
+    Camera *camera_;
 };
 
 #endif

@@ -20,5 +20,5 @@ void Renderer::renderInstance(GameObject *instance) {
 }
 
 void Renderer::render(Renderable *renderable, GameObject *instance) {
-    renderable->renderInstance(instance, game_);
+    renderable->renderInstance(instance, game_, camera_);
 }
