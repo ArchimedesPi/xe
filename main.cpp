@@ -1,12 +1,16 @@
 #include <iostream>
 #include <cstdlib>
 #include <cmath>
+#include <algorithm>
+#include <functional>
+#include <random>
 
 #include <imgui.h>
 #include <imgui_impl_glfw_gl3.h>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 #include <SOIL.h>
 
@@ -61,30 +65,41 @@ int main(int argc, char* argv[]) {
 
     Game game = Game::Game();
 
-    Renderer renderer = Renderer::Renderer(&game);
+    Camera camera = Camera::Camera();
+    camera.lookAt(glm::vec3(0, 0, 0));
+    camera.setEye(glm::vec3(0, 0, -20));
+
+    Renderer renderer = Renderer::Renderer(&game, &camera);
     CubeRenderer *cubeRenderer = new CubeRenderer();
     renderer.addRenderable(cubeRenderer);
     renderer.setupRenderables();
 
     Scene scene = Scene::Scene();
-    scene.rootNode.dumpParameters();
+    //scene.rootNode.dumpParameters();
 
     // populate the scene
-    Cube *cube = new Cube();
-    cube->x = 0;
-    cube->y = 0;
-    cube->z = 0;
-    cube->roll = 0.1;
-    scene.rootNode.addChild(cube);
+    for (int i=0; i<10; i++) {
+        Cube *cube = new Cube();
+        cube->setPosition(i*0.5, 0, i*0.5);
+        //cube->n.pitch = 0.5;
+        scene.addObject(cube);
+        scene.rootNode.addChild(&cube->n);
+    
+        cube->n.computeBackTransforms();
+        //cube->n.dumpParameters();
+        //cube->n.dumpTransforms();
+    }
 
-    cube->computeBackTransforms();
-    cube->dumpParameters();
-    cube->dumpTransforms();
 
     // -- game loop
     while(!glfwWindowShouldClose(window)) {
-        cube->yaw = glfwGetTime() * 0.5f;
-        cube->computeBackTransforms();
+        scene.rootNode.computeDependantTransforms();
+
+        
+        GLfloat radius = 10.0f;
+        GLfloat camX = sin(glfwGetTime()) * radius;
+        GLfloat camZ = cos(glfwGetTime()) * radius;
+        camera.setEye(glm::vec3(camX, 0, camZ));
 
         glfwGetFramebufferSize(window, &game.width, &game.height);
         game.ratio = (float)game.width / (float)game.height;
@@ -93,12 +108,13 @@ int main(int argc, char* argv[]) {
         glViewport(0, 0, game.width, game.height);
 
         // clear the screen
-        glClearColor(0.13f, 0.13f, 0.13f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         if (gui_state.render_wireframe) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        //renderer.renderAll();
-        renderer.render(cubeRenderer, cube);
+        for (int i=0; i<scene.rootNode.children.size(); i++) {
+            renderer.render(cubeRenderer, scene.objects.at(i));
+        }
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
         ImGui_ImplGlfwGL3_NewFrame();
