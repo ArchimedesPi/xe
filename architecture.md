@@ -30,3 +30,13 @@
   * update particle simulations
 * render the game stuff
 * render the gui
+
+### GameObjects and stuff
+GameObjects store stuff (basically state) for a thing.
+GameObjects hold a SceneNode which stores transform data for an instance.
+There exists one GameObject per instance of an object.
+Different types of objects subclass directly from GameObject and add their state parameters.
+#### rendering gameobjects
+Renderables (yeah I know, bad name) are classes that provide batched renderers for a specific type << GameObject.
+A single Renderable[T] instance is used for every instance of a T << GameObject.
+
