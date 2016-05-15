@@ -24,7 +24,7 @@ include_directories(deps/glm)
 include_directories(${PROJECT_SOURCE_DIR})
 
 add_executable(xe main.cpp gui.cpp shaders.cpp scenegraph.cpp scene.cpp
-    renderer.cpp cube.cpp)
+    renderer.cpp gameobject.cpp cube.cpp camera.cpp texture.cpp)
 
 target_link_libraries(xe ${OPENGL_LIBRARIES})
 target_link_libraries(xe ${GLFW_LIBRARIES})
