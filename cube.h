@@ -15,7 +15,7 @@ public:
     void render();
 
     void setup();
-    void renderInstance(GameObject *obj, Game *game_);
+    void renderInstance(GameObject *obj, Game *game, Camera *camera);
 private:
     static constexpr GLfloat vertices[] = {
         -0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
