@@ -12,7 +12,7 @@ void CubeRenderer::setup() {
     Shader vertexShader = Shader::fromFile("shaders/vertex/project_matrix.vert", GL_VERTEX_SHADER);
     Shader fragmentShader = Shader::fromFile("shaders/fragment/flatcolor.frag", GL_FRAGMENT_SHADER);
  
-    shader = ShaderProgram::ShaderProgram()
+    shader = ShaderProgram()
         .addShader(vertexShader)
         .addShader(fragmentShader)
         .link();

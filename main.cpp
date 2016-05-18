@@ -63,18 +63,18 @@ int main(int argc, char* argv[]) {
 
     ImGui_ImplGlfwGL3_Init(window, true);
 
-    Game game = Game::Game();
+    Game game = Game();
 
-    Camera camera = Camera::Camera();
+    Camera camera = Camera();
     camera.lookAt(glm::vec3(0, 0, 0));
     camera.setEye(glm::vec3(0, 0, -20));
 
-    Renderer renderer = Renderer::Renderer(&game, &camera);
+    Renderer renderer = Renderer(&game, &camera);
     CubeRenderer *cubeRenderer = new CubeRenderer();
     renderer.addRenderable(cubeRenderer);
     renderer.setupRenderables();
 
-    Scene scene = Scene::Scene();
+    Scene scene = Scene();
     //scene.rootNode.dumpParameters();
 
     // populate the scene
