@@ -9,8 +9,8 @@
 constexpr GLfloat CubeRenderer::vertices[];
 
 void CubeRenderer::setup() {
-    Shader vertexShader = Shader::fromFile("shaders/vertex/project_matrix.vert", GL_VERTEX_SHADER);
-    Shader fragmentShader = Shader::fromFile("shaders/fragment/flatcolor.frag", GL_FRAGMENT_SHADER);
+    Shader vertexShader = Shader::fromFile("shaders/vertex/pmat_normals.vert", GL_VERTEX_SHADER);
+    Shader fragmentShader = Shader::fromFile("shaders/fragment/simplelighting.frag", GL_FRAGMENT_SHADER);
  
     shader = ShaderProgram()
         .addShader(vertexShader)
@@ -24,13 +24,12 @@ void CubeRenderer::setup() {
     
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-    // position
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
+    // Position attribute
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
     glEnableVertexAttribArray(0);
-    // texture coords
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-    glEnableVertexAttribArray(2);
+    // Normal attribute
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+    glEnableVertexAttribArray(1);
 
     glBindVertexArray(0);
 }
@@ -49,7 +48,9 @@ void CubeRenderer::renderInstance(GameObject *obj, Game *game, Camera *camera) {
     glUniformMatrix4fv(shader.uniform("view"), 1, GL_FALSE, glm::value_ptr(view));
     glUniformMatrix4fv(shader.uniform("projection"), 1, GL_FALSE, glm::value_ptr(projection));
 
-    glUniform4f(shader.uniform("color_"), 1.0f, 0.5f, 0.2f, 1.0f);
+    glUniform4f(shader.uniform("object_color"), 1.0f, 0.5f, 0.2f, 1.0f);
+    glUniform3f(shader.uniform("light_color"), 1.0f, 1.0f, 1.0f);
+    glUniform3f(shader.uniform("light_position"), camera->eye.x, camera->eye.y, camera->eye.z);
 
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);

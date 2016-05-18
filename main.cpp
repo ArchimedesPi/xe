@@ -81,7 +81,7 @@ int main(int argc, char* argv[]) {
     for (int i=0; i<10; i++) {
         Cube *cube = new Cube();
         cube->setPosition(i*0.5, 0, i*0.5);
-        //cube->n.pitch = 0.5;
+        cube->n.pitch = 0.1*i;
         scene.addObject(cube);
         scene.rootNode.addChild(&cube->n);
     
