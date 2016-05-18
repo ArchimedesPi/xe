@@ -90,6 +90,8 @@ int main(int argc, char* argv[]) {
         //cube->n.dumpTransforms();
     }
 
+    // enable gl depth testing (occlusion should be a thing)
+    glEnable(GL_DEPTH_TEST);
 
     // -- game loop
     while(!glfwWindowShouldClose(window)) {
