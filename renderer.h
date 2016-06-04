@@ -6,6 +6,7 @@
 #include "gameobject.h"
 #include "game.h"
 #include "camera.h"
+#include "scene.h"
 
 class Renderer {
 public:
@@ -14,6 +15,7 @@ public:
     void addRenderable(Renderable *renderable);
     void setupRenderables();
 
+    void renderScene(Scene *scene);
     void renderInstances(std::vector<GameObject*> instances);
     void renderInstance(GameObject *instance);
     void render(Renderable *renderable, GameObject *instance);
