@@ -3,8 +3,9 @@
 ### code modules and their completion status
 * shader loader (✔︎)
   * uniform handler (✔︎)
-* simple gui layer (✔︎)
+* simple GUI layer (✔︎)
 * scenegraph (wip)
+  * base system (✔︎)
   * AOI culling (mostly in scenegraph) (✘)
 * render system (✘)
   * texturing (✘)
@@ -29,7 +30,7 @@
   * update physics
   * update particle simulations
 * render the game stuff
-* render the gui
+* render the GUI
 
 ### GameObjects and stuff
 GameObjects store stuff (basically state) for a thing.
