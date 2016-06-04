@@ -66,8 +66,8 @@ int main(int argc, char* argv[]) {
     Game game = Game();
 
     Camera camera = Camera();
-    camera.lookAt(glm::vec3(0, 0, 0));
-    camera.setEye(glm::vec3(0, 0, -20));
+    camera.lookAt(glm::vec3(0.75f, 0.75f, 0.75f));
+    camera.setEye(glm::vec3(5, 5, 5));
 
     Renderer renderer = Renderer(&game, &camera);
     CubeRenderer *cubeRenderer = new CubeRenderer();
@@ -75,19 +75,19 @@ int main(int argc, char* argv[]) {
     renderer.setupRenderables();
 
     Scene scene = Scene();
-    //scene.rootNode.dumpParameters();
 
     // populate the scene
-    for (int i=0; i<10; i++) {
-        Cube *cube = new Cube();
-        cube->setPosition(i*0.5, 0, i*0.5);
-        cube->n.pitch = 0.1*i;
-        scene.addObject(cube);
-        scene.rootNode.addChild(&cube->n);
+    for (int i=0; i<1; i++) {
+        for (int j=0; j<1; j++) {
+            for (int k=0; k<1; k++) {
+                Cube *cube = new Cube();
+                cube->setPosition(i*1.5, j*1.5, k*1.5);
+                scene.addObject(cube);
+                scene.rootNode.addChild(&cube->n);
     
-        cube->n.computeBackTransforms();
-        //cube->n.dumpParameters();
-        //cube->n.dumpTransforms();
+                cube->n.computeBackTransforms();
+            }
+        }
     }
 
     // enable gl depth testing (occlusion should be a thing)
@@ -95,13 +95,15 @@ int main(int argc, char* argv[]) {
 
     // -- game loop
     while(!glfwWindowShouldClose(window)) {
-        scene.rootNode.computeDependantTransforms();
+        camera.setEye(glm::vec3(sin(glfwGetTime()) * 5.0f,
+                    5.0f,
+                    cos(glfwGetTime()) * 5.0f));
 
-        
-        GLfloat radius = 10.0f;
-        GLfloat camX = sin(glfwGetTime()) * radius;
-        GLfloat camZ = cos(glfwGetTime()) * radius;
-        camera.setEye(glm::vec3(camX, 0, camZ));
+        for (int i=0; i<scene.objects.size(); i++) {
+            scene.objects.at(i)->n.yaw = 2 * glfwGetTime();
+            scene.objects.at(i)->n.roll = 1 * glfwGetTime();
+        }
+        scene.rootNode.computeDependantTransforms();
 
         glfwGetFramebufferSize(window, &game.width, &game.height);
         game.ratio = (float)game.width / (float)game.height;
