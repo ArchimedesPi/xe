@@ -4,6 +4,7 @@ project (xe CXX)
 set (xe_VERSION_MAJOR 0)
 set (xe_VERSION_MINOR 0)
 set (CMAKE_CXX_STANDARD 11)
+set (CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 find_package (PkgConfig REQUIRED)
 find_package (OpenGL REQUIRED)
