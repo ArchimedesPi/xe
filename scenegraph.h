@@ -1,6 +1,7 @@
 #ifndef __SCENEGRAPH_H__
 #define __SCENEGRAPH_H__
 
+#include <sstream>
 #include <vector>
 #include <glm/glm.hpp>
 
@@ -15,8 +16,8 @@ public:
     void computeBackTransforms();
     void computeDependantTransforms();
 
-    void dumpTransforms();
-    void dumpParameters();
+    std::ostringstream dumpTransforms();
+    std::ostringstream dumpParameters();
 
     glm::mat4 local_matrix;
     glm::mat4 custom_matrix = glm::mat4();

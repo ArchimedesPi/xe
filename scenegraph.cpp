@@ -49,15 +49,16 @@ void SceneNode::computeDependantTransforms() {
             std::mem_fun(&SceneNode::computeTransforms));
 }
 
-void SceneNode::dumpTransforms() {
-    std::cout << "scene node (" << this << ", parent:" << this->parent << ") transforms:\n" \
+std::ostringstream SceneNode::dumpTransforms() {
+    std::ostringstream s; s << "scene node (" << this << ", parent:" << this->parent << ") transforms:\n" \
         << "\tlocal: " << glm::to_string(local_matrix) \
         << "\n\tworld: " << glm::to_string(world_matrix) \
         << std::endl;
+    return s;
 }
 
-void SceneNode::dumpParameters() {
-    std::cout << "scene node (" << this << ", parent:" << this->parent << ") properties:\n" \
+std::ostringstream SceneNode::dumpParameters() {
+    std::ostringstream s; s << "scene node (" << this << ", parent:" << this->parent << ") properties:\n" \
         << "\tx:" << this->x \
         << " y:" << this->y \
         << " z:" << this->z \
@@ -65,5 +66,6 @@ void SceneNode::dumpParameters() {
         << " pitch:" << this->pitch \
         << " yaw:" << this->yaw \
         << std::endl;
+    return s;
 }
 
