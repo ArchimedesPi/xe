@@ -69,6 +69,8 @@ void ShaderProgram::use() {
     glUseProgram(shader_program_id);
 }
 
+void ShaderProgram::unuse() {}
+
 GLuint ShaderProgram::uniform(std::string uniform) {
     return glGetUniformLocation(shader_program_id, uniform.c_str());
 }

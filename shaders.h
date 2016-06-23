@@ -25,6 +25,7 @@ public:
     ShaderProgram &link();
 
     void use();
+    void unuse();
     GLuint uniform(std::string uniform);
 
     GLuint shader_program_id;
