@@ -5,10 +5,12 @@
 
 #include <GL/glew.h>
 
+#include <yaml-cpp/yaml.h>
+
 #include "shaders.h"
 #include "exceptions.h"
 
-Shader::Shader(std::string code_, GLenum shader_type_) {
+ShaderFile::ShaderFile(std::string code_, GLenum shader_type_) {
     shader_type = shader_type_;
 
     const GLchar *code = code_.c_str();
@@ -25,34 +27,46 @@ Shader::Shader(std::string code_, GLenum shader_type_) {
     }
 }
 
-Shader::~Shader() {
+ShaderFile::~ShaderFile() {
     glDeleteShader(shader_id);
 }
 
-Shader Shader::fromFile(std::string path, GLenum shader_type_) {
+ShaderFile ShaderFile::fromFile(std::string path, GLenum shader_type_) {
     std::ifstream shader_file;
     shader_file.exceptions(std::ifstream::badbit);
     shader_file.open(path);
     std::stringstream file_stream; file_stream << shader_file.rdbuf();
 
-    return Shader(file_stream.str(), shader_type_);
+    return ShaderFile(file_stream.str(), shader_type_);
 }
 
-Shader Shader::fromString(std::string code, GLenum shader_type_) {
-    return Shader(code, shader_type_);
+ShaderFile ShaderFile::fromString(std::string code, GLenum shader_type_) {
+    return ShaderFile(code, shader_type_);
 }
 
 
-ShaderProgram::ShaderProgram() {
+Shader::Shader() {
     shader_program_id = glCreateProgram();
 }
 
-ShaderProgram &ShaderProgram::addShader(Shader shader) {
+Shader &Shader::loadFromManifest(std::string path) {
+    YAML::Node manifest = YAML::LoadFile(path);
+    this->display_name = manifest["display_name"].as<std::string>();
+    
+    this->addShaderFile(ShaderFile::fromFile(
+                manifest["shaders"]["vertex"].as<std::string>(), GL_VERTEX_SHADER));
+    this->addShaderFile(ShaderFile::fromFile(
+                manifest["shaders"]["vertex"].as<std::string>(), GL_VERTEX_SHADER));
+
+    return *this;
+}
+
+Shader &Shader::addShaderFile(ShaderFile shader) {
     glAttachShader(shader_program_id, shader.shader_id);
     return *this;
 }
 
-ShaderProgram &ShaderProgram::link() {
+Shader &Shader::link() {
     glLinkProgram(shader_program_id);
 
     GLint success; GLchar error_log[512];
@@ -65,12 +79,12 @@ ShaderProgram &ShaderProgram::link() {
     return *this;
 }
 
-void ShaderProgram::use() {
+void Shader::use() {
     glUseProgram(shader_program_id);
 }
 
-void ShaderProgram::unuse() {}
+void Shader::unuse() {}
 
-GLuint ShaderProgram::uniform(std::string uniform) {
+GLuint Shader::uniform(std::string uniform) {
     return glGetUniformLocation(shader_program_id, uniform.c_str());
 }
