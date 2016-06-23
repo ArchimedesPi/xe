@@ -56,7 +56,7 @@ Shader &Shader::loadFromManifest(std::string path) {
     this->addShaderFile(ShaderFile::fromFile(
                 manifest["shaders"]["vertex"].as<std::string>(), GL_VERTEX_SHADER));
     this->addShaderFile(ShaderFile::fromFile(
-                manifest["shaders"]["vertex"].as<std::string>(), GL_VERTEX_SHADER));
+                manifest["shaders"]["fragment"].as<std::string>(), GL_FRAGMENT_SHADER));
 
     return *this;
 }
