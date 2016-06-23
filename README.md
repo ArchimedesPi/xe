@@ -16,6 +16,7 @@ you'll need:
  * glfw 3.1.2
  * libgl
  * libSOIL
+ * yaml-cpp
 
 this project uses submodules for things like `stb_*.h` and simpleini, so **you must clone xe with `--recursive`**.
 
