@@ -66,5 +66,5 @@ inputs:
     location: 1
 uniforms:
   - name: model
-    tupe: mat4
+    type: mat4
 ```
