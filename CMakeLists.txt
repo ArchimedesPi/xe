@@ -6,6 +6,21 @@ set (xe_VERSION_MINOR 0)
 set (CMAKE_CXX_STANDARD 11)
 set (CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
+set (CMAKE_CXX_FLAGS_GPERF
+    "${CMAKE_CXX_FLAGS_DEBUG} -pg")
+set (CMAKE_C_FLAGS_GPERF
+    "${CMAKE_C_FLAGS_DEBUG} -pg")
+set (CMAKE_EXE_LINKER_FLAGS_GPERF
+    "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -pg")
+set (CMAKE_SHARED_LINKER_FLAGS_GPERF
+    "${CMAKE_SHARED_LINKER_FLAGS_DEBUG} -pg")
+mark_as_advanced (
+    CMAKE_CXX_FLAGS_GPERF
+    CMAKE_C_FLAGS_GPERF
+    CMAKE_EXE_LINKER_FLAGS_GPERF
+    CMAKE_SHARED_LINKER_FLAGS_GPERF)
+
+
 find_package (PkgConfig REQUIRED)
 find_package (OpenGL REQUIRED)
 find_package (GLEW REQUIRED)
@@ -21,6 +36,7 @@ include_directories(${SOIL_INCLUDE_DIRS})
 add_subdirectory(deps/imgui)
 include_directories(deps/imgui)
 include_directories(deps/glm)
+include_directories(deps/spdlog/include)
 
 include_directories(${PROJECT_SOURCE_DIR})
 
