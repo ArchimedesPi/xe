@@ -51,6 +51,7 @@ Shader::Shader() {
 
 Shader &Shader::loadFromManifest(std::string path) {
     YAML::Node manifest = YAML::LoadFile(path);
+
     this->display_name = manifest["display_name"].as<std::string>();
     
     this->addShaderFile(ShaderFile::fromFile(
