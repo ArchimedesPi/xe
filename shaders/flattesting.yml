@@ -1,0 +1,5 @@
+# flat-color testing shader
+display_name: Flat Color testing shader
+shaders:
+  vertex: shaders/vertex/pmat_normals.vert
+  fragment: shaders/fragment/flatcolor.frag
