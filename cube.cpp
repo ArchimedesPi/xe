@@ -10,12 +10,8 @@
 constexpr GLfloat CubeRenderer::vertices[];
 
 void CubeRenderer::setup() {
-    ShaderFile vertexShader = ShaderFile::fromFile("shaders/vertex/pmat_normals.vert", GL_VERTEX_SHADER);
-    ShaderFile fragmentShader = ShaderFile::fromFile("shaders/fragment/flatcolor.frag", GL_FRAGMENT_SHADER);
- 
     shader = Shader()
-        .addShaderFile(vertexShader)
-        .addShaderFile(fragmentShader)
+        .loadFromManifest("shaders/flattesting.yml")
         .link();
 
     glGenVertexArrays(1, &VAO);
