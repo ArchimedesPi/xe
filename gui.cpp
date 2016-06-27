@@ -67,7 +67,7 @@ static void render_mmb_file() {
 void LogWindow::render(const char *title, bool *opened) {
     ImGui::SetNextWindowSize(ImVec2(500,400), ImGuiSetCond_FirstUseEver);
     ImGui::Begin(title, opened);
- 
+
     if (ImGui::Button("Clear")) this->clear();
     ImGui::SameLine();
     bool copy_log = ImGui::Button("Copy");
