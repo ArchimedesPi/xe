@@ -4,30 +4,36 @@
 #include <GL/glew.h>
 #include <string>
 
-class Shader {
+class ShaderFile {
 public:
-    ~Shader();
+    ~ShaderFile();
 
-    static Shader fromFile(std::string path, GLenum shader_type_);
-    static Shader fromString(std::string code, GLenum shader_type_);
+    static ShaderFile fromFile(std::string path, GLenum shader_type_);
+    static ShaderFile fromString(std::string code, GLenum shader_type_);
 
     GLuint shader_id;
     GLenum shader_type;
 private:
-    Shader(std::string code, GLenum shader_type_);
+    ShaderFile(std::string code, GLenum shader_type_);
 };
 
-class ShaderProgram {
+class Shader {
 public:
-    ShaderProgram();
+    Shader();
 
-    ShaderProgram &addShader(Shader shader);
-    ShaderProgram &link();
+    Shader &loadFromManifest(std::string path);
+
+    // deprecated for public use. manifests are better.
+    Shader &addShaderFile(ShaderFile shader);
+
+    Shader &link();
 
     void use();
     void unuse();
     GLuint uniform(std::string uniform);
 
+    std::string display_name;
+private:
     GLuint shader_program_id;
 };
 
