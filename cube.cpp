@@ -10,12 +10,12 @@
 constexpr GLfloat CubeRenderer::vertices[];
 
 void CubeRenderer::setup() {
-    Shader vertexShader = Shader::fromFile("shaders/vertex/pmat_normals.vert", GL_VERTEX_SHADER);
-    Shader fragmentShader = Shader::fromFile("shaders/fragment/simplelighting.frag", GL_FRAGMENT_SHADER);
+    ShaderFile vertexShader = ShaderFile::fromFile("shaders/vertex/pmat_normals.vert", GL_VERTEX_SHADER);
+    ShaderFile fragmentShader = ShaderFile::fromFile("shaders/fragment/flatcolor.frag", GL_FRAGMENT_SHADER);
  
-    shader = ShaderProgram()
-        .addShader(vertexShader)
-        .addShader(fragmentShader)
+    shader = Shader()
+        .addShaderFile(vertexShader)
+        .addShaderFile(fragmentShader)
         .link();
 
     glGenVertexArrays(1, &VAO);
@@ -53,10 +53,7 @@ void CubeRenderer::renderInstance(GameObject *obj, Game *game, Camera *camera) {
     glUniformMatrix4fv(shader.uniform("projection"), 1, GL_FALSE, glm::value_ptr(projection));
     glUniformMatrix3fv(shader.uniform("normalmat"), 1, GL_FALSE, glm::value_ptr(normalmat));
 
-    glUniform4f(shader.uniform("object_color"), 1.0f, 0.5f, 0.2f, 1.0f);
-    glUniform3f(shader.uniform("light_color"), 1.0f, 1.0f, 1.0f);
-    glUniform3f(shader.uniform("light_position"), camera->eye.x, camera->eye.y, camera->eye.z);
-    glUniform3f(shader.uniform("view_position"), camera->eye.x, camera->eye.y, camera->eye.z);
+    glUniform4f(shader.uniform("color_"), 1.0f, 0.5f, 0.2f, 1.0f);
 
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);

@@ -63,7 +63,7 @@ private:
 
     GLuint VBO, VAO;
 
-    ShaderProgram shader;
+    Shader shader;
 };
 
 #endif
