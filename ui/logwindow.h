@@ -56,6 +56,7 @@ protected:
     void _sink_it(const spdlog::details::log_msg &msg) override {
         _log_window->write(msg.formatted.str());
     }
+    void flush() {}
 private:
     ui::LogWindow* _log_window;
 };
