@@ -2,6 +2,7 @@
 #define __GUI_H__
 
 #include <imgui.h>
+#include "ui/logwindow.h"
 
 static void render_main_menubar();
 static void render_mmb_view();
@@ -21,17 +22,9 @@ struct GUIState {
 };
 extern struct GUIState gui_state;
 
-class LogWindow {
-public:
-    LogWindow() {}
-    void render(const char *title, bool *opened);
-    void clear();
+extern ui::LogWindow* log_window;
 
-private:
-    ImGuiTextBuffer buffer;
-    bool scrolldown;
-};
-
+void setup_gui();
 void render_gui();
 
 #endif

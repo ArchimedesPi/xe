@@ -8,6 +8,8 @@
 #include <imgui.h>
 #include <imgui_impl_glfw_gl3.h>
 
+#include <spdlog/spdlog.h>
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -16,6 +18,7 @@
 
 #include "game.h"
 #include "gui.h"
+#include "ui/logwindow.h"
 #include "scenegraph.h"
 #include "gameobject.h"
 #include "scene.h"
@@ -29,6 +32,7 @@ static void glfw_error_callback(int error, const char* description) {
 }
 
 int main(int argc, char* argv[]) {
+    // -- Set up a GLFW window
     GLFWwindow* window;
 
     glfwSetErrorCallback(glfw_error_callback);
@@ -61,7 +65,15 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
+
+    // -- Set up UI, game, camera, etc
     ImGui_ImplGlfwGL3_Init(window, true);
+    setup_gui();
+
+    // set up logging
+    // log_window is externalized from gui.h and initialized by setup_gui()
+    auto gui_log_sink = new LogWindowSink_mt(log_window);
+    auto logger = std::make_shared<spdlog::logger>("mainlogger", gui_log_sink);
 
     Game game = Game();
 
@@ -76,7 +88,7 @@ int main(int argc, char* argv[]) {
 
     Scene scene = Scene();
 
-    // populate the scene
+    // populate the scene with test cube(s)
     for (int i=0; i<1; i++) {
         for (int j=0; j<1; j++) {
             for (int k=0; k<1; k++) {
@@ -129,6 +141,7 @@ int main(int argc, char* argv[]) {
         glfwPollEvents();
     }
 
+    // When the gameloop exits, cleanly shut everything down
     ImGui_ImplGlfwGL3_Shutdown();
     glfwDestroyWindow(window);
     glfwTerminate();
