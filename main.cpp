@@ -108,6 +108,8 @@ int main(int argc, char* argv[]) {
 
     // -- game loop
     while(!glfwWindowShouldClose(window)) {
+        ImGui_ImplGlfwGL3_NewFrame();
+
         camera.setEye(glm::vec3(sin(glfwGetTime()) * 5.0f,
                     5.0f,
                     cos(glfwGetTime()) * 5.0f));
@@ -134,7 +136,6 @@ int main(int argc, char* argv[]) {
         }
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-        ImGui_ImplGlfwGL3_NewFrame();
         render_gui();
         ImGui::Render();
 
