@@ -32,7 +32,10 @@ void render_gui() {
     if (gui_state.xe_metrics_window_open) {}
 
     // commands and logs
-    if (gui_state.log_window_open) log_window->render("[xe][log]", &gui_state.log_window_open);
+    if (gui_state.log_window_open) log_window->render("[log]", &gui_state.log_window_open);
+    
+    // tools
+    if (gui_state.input_window_open) render_input_window("[input]", &gui_state.input_window_open);
 }
 
 static void render_main_menubar() {

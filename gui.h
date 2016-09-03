@@ -3,6 +3,7 @@
 
 #include <imgui.h>
 #include "ui/logwindow.h"
+#include "ui/inputwindow.h"
 
 static void render_main_menubar();
 static void render_mmb_view();
@@ -24,7 +25,7 @@ struct GUIState {
 };
 extern struct GUIState gui_state;
 
-extern ui::LogWindow* log_window;
+extern ui::LogWindow *log_window;
 
 void setup_gui();
 void render_gui();
