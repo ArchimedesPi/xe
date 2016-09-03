@@ -1,5 +1,4 @@
-#ifndef __SCENE_H__
-#define __SCENE_H__
+#pragma once
 
 #include <vector>
 #include "scenegraph.h"
@@ -14,5 +13,3 @@ public:
     std::vector<GameObject*> objects;
     SceneNode rootNode;
 };
-
-#endif

@@ -1,5 +1,4 @@
-#ifndef __TEXTURE_H__
-#define __TEXTURE_H__
+#pragma once
 
 #include <GL/glew.h>
 
@@ -20,5 +19,3 @@ private:
 
     GLuint texture_id;
 };
-
-#endif

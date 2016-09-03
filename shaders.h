@@ -1,5 +1,4 @@
-#ifndef __SHADER_H__
-#define __SHADER_H__
+#pragma once
 
 #include <GL/glew.h>
 #include <string>
@@ -36,5 +35,3 @@ public:
 private:
     GLuint shader_program_id;
 };
-
-#endif

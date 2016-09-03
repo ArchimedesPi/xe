@@ -1,5 +1,5 @@
-#ifndef __XE_EXCEPTIONS__
-#define __XE_EXCEPTIONS__
+#pragma once
+
 #include <exception>
 
 class ShaderCompileException : public std::runtime_error {
@@ -13,5 +13,3 @@ public:
     explicit ShaderLinkException(const std::string& message)
         : std::runtime_error("Error linking shaders: " + message) {}
 };
-
-#endif

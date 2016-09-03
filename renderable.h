@@ -1,5 +1,4 @@
-#ifndef __RENDERABLE_H__
-#define __RENDERABLE_H__
+#pragma once
 
 #include "gameobject.h"
 #include "game.h"
@@ -13,5 +12,3 @@ public:
 
     virtual void renderInstance(GameObject *obj, Game *game, Camera *camera) = 0;
 };
-
-#endif

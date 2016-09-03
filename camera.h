@@ -1,5 +1,4 @@
-#ifndef __CAMERA_H__
-#define __CAMERA_H__
+#pragma once
 
 #include <GL/glew.h>
 
@@ -29,5 +28,3 @@ protected:
 
     glm::mat4 look_matrix;
 };
-
-#endif

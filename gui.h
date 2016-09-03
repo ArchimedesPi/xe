@@ -1,5 +1,4 @@
-#ifndef __GUI_H__
-#define __GUI_H__
+#pragma once
 
 #include <imgui.h>
 #include "ui/logwindow.h"
@@ -29,5 +28,3 @@ extern ui::LogWindow *log_window;
 
 void setup_gui();
 void render_gui();
-
-#endif

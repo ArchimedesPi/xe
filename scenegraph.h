@@ -1,5 +1,4 @@
-#ifndef __SCENEGRAPH_H__
-#define __SCENEGRAPH_H__
+#pragma once
 
 #include <sstream>
 #include <vector>
@@ -29,5 +28,3 @@ public:
     SceneNode *parent = NULL;
     std::vector<SceneNode*> children;
 };
-
-#endif

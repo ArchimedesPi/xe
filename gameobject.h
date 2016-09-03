@@ -1,5 +1,4 @@
-#ifndef __GAMEOBJECT_H__
-#define __GAMEOBJECT_H__
+#pragma once
 
 #include "scenegraph.h"
 
@@ -9,5 +8,3 @@ public:
 
     void setPosition(float x, float y, float z);
 };
-
-#endif

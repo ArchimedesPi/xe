@@ -1,5 +1,4 @@
-#ifndef __TEST_CUBE_H__
-#define __TEST_CUBE_H__
+#pragma once
 
 #include "gameobject.h"
 #include "game.h"
@@ -65,5 +64,3 @@ private:
 
     Shader shader;
 };
-
-#endif
