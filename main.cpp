@@ -73,8 +73,8 @@ int main(int argc, char* argv[]) {
 
     // set up logging
     // log_window is externalized from gui.h and initialized by setup_gui()
-    auto gui_log_sink = std::make_shared<LogWindowSink_mt>(log_window);
-    auto logger = std::make_shared<spdlog::logger>("main", gui_log_sink);
+    // auto gui_log_sink = std::make_shared<LogWindowSink_mt>(log_window);
+    // auto logger = std::make_shared<spdlog::logger>("main", gui_log_sink);
 
     Game game = Game();
 
@@ -141,10 +141,13 @@ int main(int argc, char* argv[]) {
 
         glfwSwapBuffers(window);
         glfwPollEvents();
+
+        std::cout << std::flush;
+        std::cerr << std::flush;
     }
 
-    // When the gameloop exits, cleanly shut everything down
-    ImGui_ImplGlfwGL3_Shutdown();
+//     // When the gameloop exits, cleanly shut everything down
+//     ImGui_ImplGlfwGL3_Shutdown();
     glfwDestroyWindow(window);
     glfwTerminate();
 
