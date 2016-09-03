@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <functional>
 #include <random>
+#include <memory>
 
 #include <imgui.h>
 #include <imgui_impl_glfw_gl3.h>
@@ -72,8 +73,8 @@ int main(int argc, char* argv[]) {
 
     // set up logging
     // log_window is externalized from gui.h and initialized by setup_gui()
-    auto gui_log_sink = new LogWindowSink_mt(log_window);
-    auto logger = std::make_shared<spdlog::logger>("mainlogger", gui_log_sink);
+    auto gui_log_sink = std::make_shared<LogWindowSink_mt>(log_window);
+    auto logger = std::make_shared<spdlog::logger>("main", gui_log_sink);
 
     Game game = Game();
 
