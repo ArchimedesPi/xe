@@ -1,6 +1,8 @@
 #include "gui.h"
 #include <cstdlib>
 
+ui::LogWindow* log_window;
+
 void setup_gui() {
     log_window = new ui::LogWindow();
 }
@@ -12,6 +14,7 @@ struct GUIState gui_state = {
     .xe_metrics_window_open = false,
 
     .log_window_open = false,
+    .input_window_open = false,
 
     .render_mnormals = false,
     .render_datastructures = false,
@@ -38,6 +41,8 @@ static void render_main_menubar() {
             render_mmb_file();
         if (ImGui::BeginMenu("View"))
             render_mmb_view();
+        if (ImGui::BeginMenu("Tools"))
+            render_mmb_tools();
         ImGui::EndMainMenuBar();
     }
 }
@@ -56,6 +61,13 @@ static void render_mmb_view() {
 
     ImGui::EndMenu();
 }
+
+static void render_mmb_tools() {
+    ImGui::MenuItem("Input", NULL, &gui_state.input_window_open);
+
+    ImGui::EndMenu();
+}
+
 
 static void render_mmb_file() {
     if (ImGui::MenuItem("Quit", "Ctrl+Q")) {
