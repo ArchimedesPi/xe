@@ -8,6 +8,7 @@ static void render_main_menubar();
 static void render_mmb_view();
 static void render_mmb_file();
 static void render_mmb_tools();
+static void render_mmb_options();
 
 struct GUIState {
     bool imgui_test_window_open;

@@ -44,8 +44,10 @@ static void render_main_menubar() {
             render_mmb_file();
         if (ImGui::BeginMenu("View"))
             render_mmb_view();
-        if (ImGui::BeginMenu("Tools"))
-            render_mmb_tools();
+        // if (ImGui::BeginMenu("Tools"))
+        //     render_mmb_tools();
+        if (ImGui::BeginMenu("Options"))
+            render_mmb_options();
         ImGui::EndMainMenuBar();
     }
 }
@@ -66,8 +68,6 @@ static void render_mmb_view() {
 }
 
 static void render_mmb_tools() {
-    ImGui::MenuItem("Input", NULL, &gui_state.input_window_open);
-
     ImGui::EndMenu();
 }
 
@@ -79,3 +79,10 @@ static void render_mmb_file() {
     ImGui::EndMenu();
 }
 
+static void render_mmb_options() {
+    auto &style = ImGui::GetStyle();
+    ImGui::MenuItem("Input", NULL, &gui_state.input_window_open);
+    ImGui::SliderFloat("GUI overlay opacity", &style.Alpha, 0.2f, 1.0f, "%.2f");
+
+    ImGui::EndMenu();
+}

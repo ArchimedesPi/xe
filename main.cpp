@@ -27,6 +27,9 @@
 #include "cube.h"
 #include "shaders.h"
 
+#include "services/locator.h"
+#include "services/input.h"
+
 
 static void glfw_error_callback(int error, const char* description) {
     std::cout << "GLFW error (" << error << "): " << description << '\n';
@@ -75,6 +78,14 @@ int main(int argc, char* argv[]) {
     // log_window is externalized from gui.h and initialized by setup_gui()
     // auto gui_log_sink = std::make_shared<LogWindowSink_mt>(log_window);
     // auto logger = std::make_shared<spdlog::logger>("main", gui_log_sink);
+
+    // set up services
+    services::Locator::initialize();
+    auto input = new services::DesktopInput();
+    services::Locator::provideInput(input);
+
+    // enumerate controllers
+    input->updateControllers();
 
     Game game = Game();
 
