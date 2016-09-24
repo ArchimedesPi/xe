@@ -11,6 +11,9 @@ install_manifest.txt
 build/
 build_xcode/
 
+## YCM ##
+.ycm_extra_conf.py
+
 
 ### C++ ###
 # Compiled Object files
