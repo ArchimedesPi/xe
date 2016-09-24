@@ -56,3 +56,6 @@ Session.vim
 tags
 
 
+## Python ##
+*.pyc
+__pycache__/
