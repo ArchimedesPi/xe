@@ -9,8 +9,6 @@
 #include <imgui.h>
 #include <imgui_impl_glfw_gl3.h>
 
-#include <spdlog/spdlog.h>
-
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -73,11 +71,6 @@ int main(int argc, char* argv[]) {
     // -- Set up UI, game, camera, etc
     ImGui_ImplGlfwGL3_Init(window, true);
     setup_gui();
-
-    // set up logging
-    // log_window is externalized from gui.h and initialized by setup_gui()
-    // auto gui_log_sink = std::make_shared<LogWindowSink_mt>(log_window);
-    // auto logger = std::make_shared<spdlog::logger>("main", gui_log_sink);
 
     // set up services
     services::Locator::initialize();

@@ -4,9 +4,6 @@
 #include <mutex>
 
 #include <imgui.h>
-#include "spdlog/sinks/base_sink.h"
-#include "spdlog/details/format.h"
-
 
 namespace ui {
     class LogWindow {
@@ -48,19 +45,5 @@ namespace ui {
         bool scrolldown;
     };
 }
-
-class LogWindowSink : public spdlog::sinks::base_sink<std::mutex> {
-public:
-    explicit LogWindowSink(ui::LogWindow* log_window) : _log_window(log_window) {}
-protected:
-    void _sink_it(const spdlog::details::log_msg &msg) override {
-        _log_window->write(msg.formatted.str());
-    }
-    void flush() {}
-private:
-    ui::LogWindow* _log_window;
-};
-
-typedef LogWindowSink LogWindowSink_mt;
 
 #endif
