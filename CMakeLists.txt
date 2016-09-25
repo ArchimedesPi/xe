@@ -42,6 +42,8 @@ include_directories(deps/imgui)
 include_directories(deps/glm)
 include_directories(deps/spdlog/include)
 include_directories(deps/sol2)
+include_directories(deps/IconFontCppHeaders)
+include_directories(deps/filesystem)
 
 include_directories(${PROJECT_SOURCE_DIR})
 
