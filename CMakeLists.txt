@@ -3,8 +3,7 @@ cmake_minimum_required (VERSION 3.1)
 project (xe CXX)
 set (xe_VERSION_MAJOR 0)
 set (xe_VERSION_MINOR 0)
-set (CMAKE_CXX_STANDARD 11)
-set (CMAKE_EXPORT_COMPILE_COMMANDS 1)
+set (CMAKE_CXX_STANDARD 14)
 
 set (CMAKE_CXX_FLAGS_GPERF
     "${CMAKE_CXX_FLAGS_DEBUG} -pg")
