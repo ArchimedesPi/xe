@@ -28,17 +28,20 @@ find_library (SOIL_LIBRARIES NAMES SOIL Soil soil)
 find_path (SOIL_INCLUDE_DIRS SOIL.h PATH_SUFFIXES SOIL HINTS "/usr/local/include")
 find_library (YAML_CPP_LIBRARIES NAMES yaml-cpp)
 find_path (YAML_CPP_INCLUDE_DIRS yaml.h PATH_SUFFIXES yaml-cpp HINTS "/usr/local/include" "/usr/include")
+find_package (Lua)
 
 include_directories(${OPENGL_INCLUDE_DIRS})
 include_directories(${GLFW_INCLUDE_DIRS})
 include_directories(${GLEW_INCLUDE_DIRS})
 include_directories(${SOIL_INCLUDE_DIRS})
 include_directories(${YAML_CPP_INCLUDE_DIRS})
+include_directories(${LUA_INCLUDE_DIRS})
 
 add_subdirectory(deps/imgui)
 include_directories(deps/imgui)
 include_directories(deps/glm)
 include_directories(deps/spdlog/include)
+include_directories(deps/sol2)
 
 include_directories(${PROJECT_SOURCE_DIR})
 
@@ -51,6 +54,7 @@ target_link_libraries(xe ${GLFW_LIBRARIES})
 target_link_libraries(xe ${GLEW_LIBRARIES})
 target_link_libraries(xe ${SOIL_LIBRARIES})
 target_link_libraries(xe ${YAML_CPP_LIBRARIES})
+target_link_libraries(xe ${LUA_LIBRARIES})
 target_link_libraries(xe imgui)
 
 add_custom_command(TARGET xe PRE_BUILD
