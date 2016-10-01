@@ -10,6 +10,11 @@
 #include "shaders.h"
 #include "exceptions.h"
 
+#include "services/locator.h"
+
+using namespace services;
+
+
 ShaderFile::ShaderFile(std::string code_, GLenum shader_type_) {
     shader_type = shader_type_;
 
@@ -49,15 +54,19 @@ Shader::Shader() {
     shader_program_id = glCreateProgram();
 }
 
-Shader &Shader::loadFromManifest(std::string path) {
-    YAML::Node manifest = YAML::LoadFile(path);
+Shader &Shader::loadFromManifest(std::string resource) {
+    auto resLocator = &Locator::resource();
+
+    YAML::Node manifest = YAML::LoadFile(resLocator->pathTo(resource));
 
     this->display_name = manifest["display_name"].as<std::string>();
     
     this->addShaderFile(ShaderFile::fromFile(
-                manifest["shaders"]["vertex"].as<std::string>(), GL_VERTEX_SHADER));
+                resLocator->pathTo(manifest["shaders"]["vertex"].as<std::string>()),
+                GL_VERTEX_SHADER));
     this->addShaderFile(ShaderFile::fromFile(
-                manifest["shaders"]["fragment"].as<std::string>(), GL_FRAGMENT_SHADER));
+                resLocator->pathTo(manifest["shaders"]["fragment"].as<std::string>()),
+                GL_FRAGMENT_SHADER));
 
     return *this;
 }
