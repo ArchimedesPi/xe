@@ -47,7 +47,7 @@ include_directories(deps/filesystem)
 
 include_directories(${PROJECT_SOURCE_DIR})
 
-add_executable(xe main.cpp game.cpp gui.cpp shaders.cpp scenegraph.cpp scene.cpp
+add_executable(xe main.cpp gui.cpp shaders.cpp scenegraph.cpp scene.cpp
     renderer.cpp gameobject.cpp cube.cpp camera.cpp texture.cpp services/input.cpp
     services/locator.cpp services/resources.cpp behavior.cpp ui/theme.cpp)
 
