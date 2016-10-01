@@ -16,7 +16,6 @@ struct GUIState {
     bool imgui_metrics_window_open;
     bool xe_metrics_window_open;
 
-    bool log_window_open;
     bool input_window_open;
 
     bool render_mnormals;
