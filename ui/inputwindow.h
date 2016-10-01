@@ -19,5 +19,7 @@ static void render_input_window(const char *title, bool *opened) {
 	ImGui::ListBoxFooter();
     ImGui::SameLine(); ui::ShowHelpMarker("Click controllers to activate them.");
 
+    if(ImGui::Button("Refresh controller list")) services::Locator::getInput().updateControllers();
+
 	ImGui::End();
 }
