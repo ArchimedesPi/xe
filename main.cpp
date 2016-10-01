@@ -15,6 +15,8 @@
 
 #include <SOIL.h>
 
+#include <filesystem/path.h>
+
 #include "game.h"
 #include "gui.h"
 #include "ui/logwindow.h"
@@ -27,6 +29,7 @@
 
 #include "services/locator.h"
 #include "services/input.h"
+#include "services/resources.h"
 
 
 static void glfw_error_callback(int error, const char* description) {
@@ -75,7 +78,11 @@ int main(int argc, char* argv[]) {
     // set up services
     services::Locator::initialize();
     auto input = new services::DesktopInput();
+    auto resource_locator = new services::FilesystemResourceLocator();
+    resource_locator->basedir = services::FilesystemResourceLocator::backtrackToBasedir(filesystem::path::getcwd());
     services::Locator::provideInput(input);
+    services::Locator::provideResourceLocator(resource_locator);
+
 
     // enumerate controllers
     input->updateControllers();
