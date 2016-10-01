@@ -1,4 +1,5 @@
 #include "gui.h"
+#include "ui/theme.h"
 #include <cstdlib>
 
 ui::LogWindow* log_window;
@@ -12,6 +13,8 @@ struct GUIState gui_state = {
 
     .input_window_open = false,
 
+    .dark_style = false,
+
     .render_mnormals = false,
     .render_datastructures = false,
     .render_wireframe = true,
@@ -19,6 +22,7 @@ struct GUIState gui_state = {
 
 void setup_gui() {
     log_window = new ui::LogWindow();
+    setup_ui_theme(gui_state.dark_style);
 }
 
 void render_gui() {
@@ -79,6 +83,9 @@ static void render_mmb_options() {
     auto &style = ImGui::GetStyle();
     ImGui::MenuItem("Input", NULL, &gui_state.input_window_open);
     ImGui::SliderFloat("GUI overlay opacity", &style.Alpha, 0.2f, 1.0f, "%.2f");
+    if(ImGui::Checkbox("Dark mode", &gui_state.dark_style)) {
+        setup_ui_theme(gui_state.dark_style);
+    }
 
     ImGui::EndMenu();
 }

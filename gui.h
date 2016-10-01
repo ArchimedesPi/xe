@@ -17,6 +17,7 @@ struct GUIState {
     bool xe_metrics_window_open;
 
     bool input_window_open;
+    bool dark_style;
 
     bool render_mnormals;
     bool render_datastructures;
