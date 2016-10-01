@@ -13,7 +13,7 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
-#include <SOIL.h>
+#include <sol.hpp>
 
 #include <filesystem/path.h>
 
