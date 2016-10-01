@@ -11,8 +11,6 @@ void setup_ui_theme(bool invert) {
     // -- set up fonts
     ImGuiIO& io = ImGui::GetIO();
     
-    io.Fonts->Clear();
-
     // merge in MD and KG icons
     static const ImWchar md_icons_ranges[] = {ICON_MIN_MD, ICON_MAX_MD};
     ImFontConfig icons_config; icons_config.MergeMode = true; icons_config.PixelSnapH = true;    
@@ -41,6 +39,12 @@ void setup_ui_theme(bool invert) {
 
     style->AntiAliasedLines = true;
     style->AntiAliasedShapes = true;
+
+    set_ui_colors(invert);
+}
+
+void set_ui_colors(bool invert) {
+    ImGuiStyle *style = &ImGui::GetStyle();
 
     style->Colors[ImGuiCol_Text]                  = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
     style->Colors[ImGuiCol_TextDisabled]          = ImVec4(0.29f, 0.28f, 0.28f, 0.90f);
@@ -96,4 +100,3 @@ void setup_ui_theme(bool invert) {
         }
     }
 }
-

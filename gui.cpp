@@ -92,7 +92,7 @@ static void render_mmb_options() {
     ImGui::MenuItem("Video", NULL, &gui_state.video_window_open);
     ImGui::SliderFloat("GUI overlay opacity", &style.Alpha, 0.2f, 1.0f, "%.2f");
     if(ImGui::Checkbox("Dark mode", &gui_state.dark_style)) {
-        setup_ui_theme(gui_state.dark_style);
+        set_ui_colors(gui_state.dark_style);
     }
 
     ImGui::EndMenu();
