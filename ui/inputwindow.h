@@ -1,12 +1,9 @@
-#ifndef __UI_INPUTWINDOW_H__
-#define __UI_INPUTWINDOW_H__
-
+#pragma once
 #include <vector>
 
 #include <imgui.h>
 #include <GLFW/glfw3.h>
 
-#include "ui/util.h"
 #include "services/locator.h"
 
 static void render_input_window(const char *title, bool *opened) {
@@ -24,5 +21,3 @@ static void render_input_window(const char *title, bool *opened) {
 
 	ImGui::End();
 }
-
-#endif
