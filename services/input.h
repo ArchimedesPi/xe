@@ -6,12 +6,14 @@
 
 #include <GLFW/glfw3.h>
 
-class Joystick {
+class Controller {
 public:
-	Joystick(int idx) : index(idx), enabled(false) {this->updateMetadata();}
+	Controller(int idx) : index(idx), enabled(false) {this->updateMetadata();}
+
+    double getAxis(std::string axis);
+    double getButton(std::string button);
 
 	void updateMetadata();
-
 	std::string dump();
 
 	int index;
@@ -22,14 +24,14 @@ public:
 namespace services {
 	class Input {
 	public:
-		virtual std::vector<Joystick*> getControllers() = 0;
+		virtual std::vector<Controller*> getControllers() = 0;
 		virtual void updateControllers() = 0;
 	};
 
 	class DesktopInput : public Input {
 	public:
-		virtual std::vector<Joystick*> getControllers() {
-			return packedControllers; // TODO: replace with real joystick getter
+		virtual std::vector<Controller*> getControllers() {
+			return packedControllers;
 		}
 
 		virtual void updateControllers() {
@@ -37,7 +39,7 @@ namespace services {
 			for (int i=0; i<GLFW_JOYSTICK_LAST; i++) {
 				if (glfwJoystickPresent(i)) {
 					if (controllers[i] == nullptr) {
-						controllers[i] = new Joystick(i);
+						controllers[i] = new Controller(i);
 					} else {
 						controllers[i]->updateMetadata();
 					}
@@ -47,15 +49,16 @@ namespace services {
 				}
 			}
 		}
+
 	private:
-		std::array<Joystick*, GLFW_JOYSTICK_LAST> controllers;
-		std::vector<Joystick*> packedControllers;
+		std::array<Controller*, GLFW_JOYSTICK_LAST> controllers;
+		std::vector<Controller*> packedControllers;
 	};
 
 	class NullInput : public Input {
 	public:
-		virtual std::vector<Joystick*> getControllers() {
-			return std::vector<Joystick*>();
+		virtual std::vector<Controller*> getControllers() {
+			return std::vector<Controller*>();
 		}
 		virtual void updateControllers() {}
 	};

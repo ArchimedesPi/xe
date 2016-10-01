@@ -1,9 +1,10 @@
 #include "input.h"
 
-void Joystick::updateMetadata() {
+void Controller::updateMetadata() {
 	this->name = std::string(glfwGetJoystickName(this->index));
 }
 
-std::string Joystick::dump() {
+std::string Controller::dump() {
 	return std::to_string(this->index) + ": " + this->name;
 }
+
