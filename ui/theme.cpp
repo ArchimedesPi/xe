@@ -43,7 +43,7 @@ void setup_ui_theme(bool invert) {
     style->AntiAliasedShapes = true;
 
     style->Colors[ImGuiCol_Text]                  = ImVec4(0.00f, 0.00f, 0.00f, 1.00f);
-    style->Colors[ImGuiCol_TextDisabled]          = ImVec4(0.40f, 0.39f, 0.38f, 0.10f);
+    style->Colors[ImGuiCol_TextDisabled]          = ImVec4(0.29f, 0.28f, 0.28f, 0.90f);
     style->Colors[ImGuiCol_WindowBg]              = ImVec4(0.92f, 0.91f, 0.86f, 0.70f);
     style->Colors[ImGuiCol_ChildWindowBg]         = ImVec4(1.00f, 0.98f, 0.93f, 0.58f);
     style->Colors[ImGuiCol_PopupBg]               = ImVec4(0.92f, 0.91f, 0.88f, 0.92f);
