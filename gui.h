@@ -9,6 +9,7 @@ static void render_mmb_view();
 static void render_mmb_file();
 static void render_mmb_tools();
 static void render_mmb_options();
+static void render_mmb_debug();
 
 struct GUIState {
     bool imgui_test_window_open;
@@ -17,6 +18,8 @@ struct GUIState {
     bool xe_metrics_window_open;
 
     bool input_window_open;
+    bool video_window_open;
+
     bool dark_style;
 
     bool render_mnormals;

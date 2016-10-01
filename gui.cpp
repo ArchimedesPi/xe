@@ -12,6 +12,7 @@ struct GUIState gui_state = {
     .xe_metrics_window_open = false,
 
     .input_window_open = false,
+    .video_window_open = false,
 
     .dark_style = false,
 
@@ -37,6 +38,7 @@ void render_gui() {
 
     // options
     if (gui_state.input_window_open) render_input_window("[input]", &gui_state.input_window_open);
+    if (gui_state.video_window_open) {}
 }
 
 static void render_main_menubar() {
@@ -49,6 +51,8 @@ static void render_main_menubar() {
         //     render_mmb_tools();
         if (ImGui::BeginMenu("Options"))
             render_mmb_options();
+        if (ImGui::BeginMenu("Debug"))
+            render_mmb_debug();
         ImGui::EndMainMenuBar();
     }
 }
@@ -71,6 +75,9 @@ static void render_mmb_tools() {
     ImGui::EndMenu();
 }
 
+static void render_mmb_debug() {
+    ImGui::EndMenu();
+}
 
 static void render_mmb_file() {
     if (ImGui::MenuItem("Quit", "Ctrl+Q")) {
@@ -82,6 +89,7 @@ static void render_mmb_file() {
 static void render_mmb_options() {
     auto &style = ImGui::GetStyle();
     ImGui::MenuItem("Input", NULL, &gui_state.input_window_open);
+    ImGui::MenuItem("Video", NULL, &gui_state.video_window_open);
     ImGui::SliderFloat("GUI overlay opacity", &style.Alpha, 0.2f, 1.0f, "%.2f");
     if(ImGui::Checkbox("Dark mode", &gui_state.dark_style)) {
         setup_ui_theme(gui_state.dark_style);
