@@ -59,7 +59,3 @@ target_link_libraries(xe ${YAML_CPP_LIBRARIES})
 target_link_libraries(xe ${LUA_LIBRARIES})
 target_link_libraries(xe imgui)
 
-add_custom_command(TARGET xe PRE_BUILD
-                   COMMAND ${CMAKE_COMMAND} -E copy_directory
-                       ${CMAKE_SOURCE_DIR}/shaders $<TARGET_FILE_DIR:xe>/shaders)
-
