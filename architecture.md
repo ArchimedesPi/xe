@@ -1,11 +1,11 @@
 ## xe architecture
 
 ### code modules and their completion status
-* shader loader (✔︎)
-  * uniform handler (✔︎)
-* simple GUI layer (✔︎)
+* shader loader (✔)
+  * uniform handler (✔)
+* simple GUI layer (✔)
 * scenegraph (wip)
-  * base system (✔︎)
+  * base system (✔)
   * AOI culling (mostly in scenegraph) (✘)
 * render system (✘)
   * texturing (✘)
@@ -67,4 +67,21 @@ inputs:
 uniforms:
   - name: model
     type: mat4
+```
+
+### Materials
+#### Material structure and metadata
+
+Each material manifest should look something like:
+
+```yaml
+display_name: "Funky Material"
+inputs:
+  - fuzziness: {type: float, glname: mat_fuzziness}
+  - texture: {type: tex2, glname: global_texture}
+shaders:
+  - "shaders/fuzzy-shader.yml"
+    pass:
+     - fuzziness: {as: uniform}
+     - texture # the default is {as: uniform}
 ```
