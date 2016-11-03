@@ -19,6 +19,8 @@ struct GUIState gui_state = {
     .render_mnormals = false,
     .render_datastructures = false,
     .render_wireframe = true,
+
+    .scenegraph_window_open = false,
 };
 
 void setup_gui() {
@@ -47,7 +49,7 @@ static void render_main_menubar() {
             render_mmb_file();
         if (ImGui::BeginMenu("View"))
             render_mmb_view();
-        // if (ImGui::BeginMenu("Tools"))
+        //if (ImGui::BeginMenu("Tools"))
         //     render_mmb_tools();
         if (ImGui::BeginMenu("Options"))
             render_mmb_options();
@@ -76,6 +78,7 @@ static void render_mmb_tools() {
 }
 
 static void render_mmb_debug() {
+    ImGui::MenuItem("View Scenegraph", NULL, &gui_state.scenegraph_window_open);
     ImGui::EndMenu();
 }
 

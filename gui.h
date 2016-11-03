@@ -25,6 +25,8 @@ struct GUIState {
     bool render_mnormals;
     bool render_datastructures;
     bool render_wireframe;
+
+    bool scenegraph_window_open;
 };
 extern struct GUIState gui_state;
 
