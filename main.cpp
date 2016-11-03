@@ -24,7 +24,7 @@
 #include "gameobject.h"
 #include "scene.h"
 #include "renderer.h"
-#include "cube.h"
+#include "gameobjects/cube.h"
 #include "shaders.h"
 
 #include "services/locator.h"
