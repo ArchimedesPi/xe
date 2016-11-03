@@ -101,9 +101,9 @@ int main(int argc, char* argv[]) {
     Scene scene = Scene();
 
     // populate the scene with test cube(s)
-    for (int i=0; i<1; i++) {
-        for (int j=0; j<1; j++) {
-            for (int k=0; k<1; k++) {
+    for (int i=0; i<10; i++) {
+        for (int j=0; j<10; j++) {
+            for (int k=0; k<10; k++) {
                 Cube *cube = new Cube();
                 cube->setPosition(i*1.5, j*1.5, k*1.5);
                 scene.addObject(cube);
